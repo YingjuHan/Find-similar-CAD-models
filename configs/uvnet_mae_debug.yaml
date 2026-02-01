@@ -1,6 +1,10 @@
 data:
   root: /path/to/ABC
   split: train
+  layout: abc
+  step_root: /path/to/ABC/chunks
+  graph_root: /path/to/ABC_graphs
+  uvnet_root: external/uvnet
 model:
   mask_ratio: 0.6
   embedding_dim: 64
