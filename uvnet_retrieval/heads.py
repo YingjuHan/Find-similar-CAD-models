@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 class GeometryHead(nn.Module):
-    def __init__(self, dim, out_dim=4):
+    def __init__(self, dim, out_dim=6):
         super().__init__()
         self.net = nn.Linear(dim, out_dim)
     def forward(self, x):
