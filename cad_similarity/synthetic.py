@@ -71,13 +71,16 @@ def generate_parts(seed=0):
     return parts
 
 
-def sample_part(part, n_base=1000, n_teeth=500, seed=0):
+def sample_surface(mesh, n_points=1000, seed=0):
     np.random.seed(seed)
-    base_pts, base_faces = trimesh.sample.sample_surface(part.base_mesh, n_base)
-    base_normals = part.base_mesh.face_normals[base_faces]
+    pts, faces = trimesh.sample.sample_surface(mesh, n_points)
+    normals = mesh.face_normals[faces]
+    return pts, normals
 
-    teeth_pts, teeth_faces = trimesh.sample.sample_surface(part.teeth_mesh, n_teeth)
-    teeth_normals = part.teeth_mesh.face_normals[teeth_faces]
+
+def sample_part(part, n_base=1000, n_teeth=500, seed=0):
+    base_pts, base_normals = sample_surface(part.base_mesh, n_points=n_base, seed=seed)
+    teeth_pts, teeth_normals = sample_surface(part.teeth_mesh, n_points=n_teeth, seed=seed + 1)
 
     pts = np.vstack([base_pts, teeth_pts])
     normals = np.vstack([base_normals, teeth_normals])
