@@ -1,0 +1,261 @@
+
+
+--- Page 1 ---
+ScienceDirect
+Available online at www.sciencedirect.com
+www.elsevier.com/locate/procedia 
+Procedia CIRP 96 (2021) 133–138
+2212-8271 © 2021 The Authors. Published by Elsevier B.V.
+This is an open access article under the CC BY-NC-ND license ( https://creativecommons.org/licenses/by-nc-nd/4.0)
+Peer-review under responsibility of the scientific committee of the 8th CIRP Global Web Conference – Flexible Mass Customisation
+10.1016/j.procir.2021.01.065© 2021 The Authors. Published by Elsevier B.V . 
+This is an open access article under the CC BY-NC-ND license (https://creativecommons.org/licenses/by-nc-nd/4.0 )
+Peer-review under responsibility of the scientific committee of the 8th CIRP Global Web Conference – Flexible Mass Customisation
+Keywords: Digital Engineering; similarity; comparison; Machine Learning; data-driven
+1. Introduction
+The change in manufacturing paradigms can be divided in
+roughly four segments: The ﬁrst being the industrial applica-
+tion of steam engines in the late 18thcentury. The production
+process shifted from hand production methods to machine sup-ported work. This enabled the second change in manufacturingthrough the integration of the assembly line production by us-ing conveyor belts. Then followed the application of computersand electronics which resulted in partial automation of worksteps. The further development of this stage leads to the cur-rent change, where smart manufacturing marks the beginningof a new chapter. A typical procedure for smart manufactur-ing is shown in Figure 1. For this new era in manufacturing,
+many deﬁnitions have been developed. The National Institute of
+∗Corresponding author. Tel.: +49-(0)9131-85-23658 ; fax: +49-(0)9131-85-
+23223. e-mail address: bickel@mfk.fau.deStandard and Technology, for example, describes smart manu-facturing as a system which is fully-integrated and collabrative.Furthermore it can react in real time to the changing demandsand conditions in a factory, supply network and customer needs[1]. Other deﬁnitions can be found in [2, 3,4,5]. They all share
+the main theme of smart manufacturing, which is the automa-tion and connectivity in the manufacturing process to achievehigher quality and a shorter production time.
+With an ever-increasing amount of data, a new technology
+has been established to realize these goals, which uses data-driven methods and algorithms in the ﬁeld of smart manufac-turing [6]. These methods mainly focus on one step of the smartmanufacturing process, e.g. smart design, process planning,material distribution or manufacturing monitoring. The appli-cation of data-driven tools in the intersection between these dif-ferent domains currently remains an issue for which the conceptpresented in this paper aims to provide a solution. The goal isto use the geometry design data to support the subsequent pro-cesses, especially the process planning. A concept for a simi-larity search method is stated in this paper, which is capable ofCIRPe 2020 – 8th CIRP Global Web Conference – Flexible Mass Customisation
+Comparing CAD part models for geometrical similarity:
+A concept using machine learning algorithms
+S. Bickela,∗, C. Sauera, B. Schleicha, S. Wartzacka
+aEngineering Design, Friedrich-Alexander-University Erlangen-Nuremberg (FAU), Martensstrasse 9, 91058 Erlangen, Germany
+Abstract
+The eﬃcient execution of process planning activities requires the knowledge from several distinct domains. However, in this context, a common
+issue is the existence of collective knowledge in the one domain with a lack of networked expertise with other domains. Motivated by this, thepaper proposes an approach to support process planning by comparing the generated part design with older, validated products. The utilizationof this earlier CAD part models has the potential to reduce development costs, shorten the production start-up time and improve the productquality. The new concept provides the manufacturing personnel with a method for comparing the newly designed part with a pool of validatedmodels to identify the most similar one. Each previous CAD part model is linked with the necessary manufacturing information, so that theinitial values for the manufacturing process are available without a time consuming testing phase. The method is divided in three main steps: theglobal similarity comparison, the segmentation of the part and the local similarity comparison. In the ﬁrst step, the geometry is projected onto asphere and then transformed to a matrix. Afterwards these matrices are compared and clustered into corresponding groups. In the following step,a Machine Learning algorithm segments the objects into speciﬁc, manufacturing relevant groups. In every cluster, the segmented geometries areagain compared for similarity. The combination of the ﬁrst and the second ranking results in a global similarity hierarchy for the newly designedpart. In this paper, the entire procedure is shown with the example of sheet-bulk metal formed parts. This new manufacturing process particularlybeneﬁts from this method, as the amount of data is still limited and therefore little expert knowledge exists.
+This is a resupply of March 2023 as the template used in the publication of the original article contained errors. The content of the article has remained unaffected.
+
+
+--- Page 2 ---
+134 S. Bickel  et al. / Procedia CIRP 96 (2021) 133–138
+ﬁnding similar, already manufactured components on the basis
+of the initial geometry and therefore their respective productiondata to support the new process.
+Fig. 1. Smart manufacturing cycle according to [6]
+2. Methodical background
+2.1. Similarity comparison
+The idea of similarity search is to ﬁnd the already con-
+structed 3D-object that is most similar to a given search input.
+This task is achieved by converting a 3D geometry into a uniquesignature, which is then compared to various other signaturesin order to ﬁnd the one most similar to the initial search query.Similarity search is in general interdisciplinary since it is ap-plied in many diﬀerent areas such as computer vision, CADdata, computer graphics or multimedia. Therefore, the calcula-tion process of this unique shape descriptor is based on diﬀerentprinciples. Frequently deployed methods are based on: graphs,features, images, histograms or grouping technology (GT). Thiscategorization is related to the work of [7, 8,9,10].
+Graph based algorithms extract the necessary information
+about the geometry of an object from the connections of dif-ferent shape components. Examples for this technique can befound in [11] and [12]. Other methods rely on features that arecalculated from the individual shape. These features can be ap-plied to the entire component or local areas only. Simple ex-amples of features are the volume or the Fourier transforma-tion of the shape boundary. A collection of methods is listedin [8] and [10]. Another way to compare geometries is to useimages. This method oﬀers the advantage that not only 3D ge-ometry can be compared with each other but also a search for3D models can be carried out on the basis of 2D drawings. Thedetailed explanation of these methods can be found in [13, 14].
+Histogram based methods describe diﬀerent geometric featuresthrough histograms. An example for this technique is the AD(angle and distance) histogram, according to [15].
+The similarity search using the group technology has its
+roots in manufacturing technology. GT-codes are used for orga-nizing production materials according to their part family. Pop-ular and well established code-systems are the Opitz code [16],the DCLASS code and the KK3 system [17]. These codes arecomputed automatically from the geometry and are then usedby the similarity search system. An example for an approachbased on the Opitz code is stated in [7] and for the DCLASScode in [18]. Because of the large number of possible appli-cations, many of the additional methods use diﬀerent types ofsignature generation, such as text search, shape slicing or de-formations. More information can be found in [7, 8,9,10].
+However, not only the type of signature generation is dis-
+tinguished, also the area of application to the geometry can beused as a distinctive factor. If the whole geometry is comparedwith another total geometry, it is considered to be a global sim-ilarity search. The search for partial areas of a geometry in anoverall geometry is called partial shape retrieval and is basedon the idea of each geometry being composed of several sub-geometries. If the human body is referred to as a whole part,the hands are an example for a partial geometry. However, onehand can further be divided into various ﬁngers. This exact def-inition of subcategories highlights the problem of partial shaperetrieval. [19]
+The speciﬁc challenges of the manufacturing process require
+a combination of these two methods. First, the system must ﬁndthe global similarity between the components since the globalshape has the greatest inﬂuence on the manufacturing parame-ters. Second, detailed areas of the geometry inﬂuence speciﬁcmanufacturing parameters. These geometry areas have to be de-ﬁned by the responsible process engineer who holds the neces-sary domain know-how.
+This publication represents a new approach using global as
+well as local similarities to support the process engineer in ﬁnd-ing similar parts. This procedure uses diﬀerent methods of ma-chine learning and a novel way of transferring geometry into ashape signature to achieve the stated goal.
+2.2. Machine learning methods
+The research ﬁeld of machine learning is dedicated to the
+development and automation of computer-based learning pro-
+cesses. One of the ﬁrst mentions of this topics explains ma-chine learning as the ability of computers to learn without be-ing explicitly programmed [20]. Many of the subsequent de-scriptions of this ﬁeld can be summarized with these properties[21, 22,23]: computer learning, automated processes, pattern
+recognition and adaptation to new data.
+Machine learning methods can generally be divided by vari-
+ous characteristics. The kind of training is often used to seper-ate diﬀerent learning methods among themselves. Accordingto [24] these are: supervised learning, unsupervised learning,semi-monitored learning and active learning.
+2.2.1. Classiﬁcation
+Classiﬁcation is a typical method of supervised learning be-
+cause the diﬀerent classes must be deﬁned before the train-
+ing process itself begins. The goal of classiﬁcation is to assigndata to previously deﬁned classes. Due to the wide ﬁeld of ap-plication a multitude of procedures and methods for carryingout a classiﬁcation exists. According to [25, 26], examples for
+2
+This is a resupply of March 2023 as the template used in the publication of the original article contained errors. The content of the article has remained unaffected.
+
+
+--- Page 3 ---
+S. Bickel  et al. / Procedia CIRP 96 (2021) 133–138 135
+known classiﬁcation methods are artiﬁcial neural networks, k-
+nearest neighbors, decision trees, support vector machines ornaive bayes classiﬁers.
+2.2.2. Clustering
+The classiﬁcation problem is closely related to cluster anal-
+ysis, which combines values into a number of groups or classes
+unknown at the beginning of the analysis. Clustering is there-fore an unsupervised learning method. During cluster analysis,groups or clusters are identiﬁed in the data. In order to carry outsuch an analysis, a problem deﬁnition must be given. This can,for example, be the division of customers according to targetgroups in order to improve the eﬀectiveness of the advertising.There are many methods for carrying out cluster analysis. In[25, 27] mentioned example methods are: the k-means algo-
+rithm, the fuzzy variant or self organizing maps.
+3. General approach
+In this section the general approach is presented and ex-
+plained in more detail. The individual modules of the overall
+system are: the projection method, the similarity comparisonand the shape segmentation. These three methods are describedin sequence, starting with a general overview of the procedure.
+3.1. Overview
+To realize the idea of diﬀerentiation between local and
+global geometric similarity, the procedure must have a two-step
+structure. Therefore, the approach is modular and contains asmain components: the similarity comparison based on the pro-jection method, the clustering of results and the shape segmen-tation for further investigation. An overview of the whole pro-cess is depicted in Figure 2.
+Fig. 2. Overall procedure of the similarity search
+At ﬁrst a new search component is compared with the avail-
+able database. For this purpose the part must be transformedinto a shape descriptor. To start this process, the geometry needsto be randomly sampled with points on the surface. This pointcloud is then projected onto a detector sphere, which is trans-formed into a matrix. Through this method, any geometry canbe converted into a matrix which is more clariﬁed in section3.2. In the next step the search-matrix is compared to eachdatabase-matrix via the correlation coeﬃcient. The calculatedscalar value can then be used for clustering the diﬀerent results.This leads to parts being sorted in various clusters, respective totheir correlation coeﬃcient.
+Subsequently, the clusters are examined individually and
+ranked internally based on their local geometric similarity. Thissimilarity value is calculated with the special geometric fea-tures of the searched part, which has been deﬁned by the user.The component is automatically separated by the system intodiﬀerent segments and the relevant geometry parts are againcompared for similarity. This analysis employs nearly the samemethod for the comparison but instead of projecting the partfrom the center onto the detector sphere, the local similarityvalue uses the normal of each point as projection direction. Thetwo types of projection are presented in more depth in the fol-lowing section.
+At the end of the process each local cluster is ranked and
+ﬁnally linked to the clusters of global similarity clusters. In thelast step an overall ranking is determined and the correspondingcomponents can be displayed to the employee.
+3.2. Projection method
+The procedure for transforming 3D geometry to a matrix is
+based on the projection of points onto a surface. The projection
+method is based on the work of [28], where the process clas-siﬁes ﬁnite element simulations. For the similarity comparisonthe projection receiver surface is a segmented sphere, as seenin Figure 3. Theses segments are called pixels and are spanned
+in a grid pattern of 224x224 around the sphere. They count thepoints of intersection with the projected lines and their ﬁnalnumbers are equal to the value of the corresponding matrix.The way theses point nodes are projected onto the sphere, de-
+Fig. 3. Overview of the two diﬀerent projection methods
+3
+This is a resupply of March 2023 as the template used in the publication of the original article contained errors. The content of the article has remained unaffected.
+
+
+--- Page 4 ---
+136 S. Bickel  et al. / Procedia CIRP 96 (2021) 133–138
+pends on the similarity measure. A comparison of the two ways
+of projection is shown in Figure 3. For global similarity, the
+points are projected from the center of the object through eachpoint onto the detector sphere. In contrast to the local similarity,the points are projected in normal direction. These directionalvalues are calculated from the neighboring points. The diﬀer-ence between the two methods can be seen in the illustration.It has been observed that the projection from the center repre-sents the general shape of a component (round, ﬂat, cubic) bet-ter than the normal projection. This method oﬀers advantagesfor smaller elements of a geometry since more information canbe transferred. It should also be noted that the normal projec-tion is more prone to errors due to the calculation of the normaldirection, where no information about the inside or outside ofthe geometry can be determined.
+After the points are successfully counted through every
+pixel, the sphere is converted into a matrix. This process is sim-ilar to the transition from a globe to a map.
+3.3. Similarity comparison
+After the geometry has been successfully transformed into a
+matrix, the next step is to determine the similarity of the matri-
+ces. The result of the comparison is a scalar value which servesas the basis for the clustering and ranking. To compare the sim-ilarity of two matrices, the 2D correlation coeﬃcient is used.This metric can be applied for comparing images and matrices.The result is always a scalar number between -1 and 1. Thisvalue represents the similarity of the two matrices. When form-ing clusters, the search for groups starts at the best result. Ifthe next component is within -0.01 of the calculated value, bothcomponents are combined into a cluster. If this is not the case,a new cluster is formed and again a comparison is conductedbased on the value. These groups are then examined in moredepth with shape segmentation, which is the preliminary workfor the local similarity comparison.
+3.4. Shape segmentation
+In this chapter the process of shape segmentation, which is
+necessary for the determination of the local similarity, is pre-
+sented in greater depth. The procedure is based on the work of[29], which uses supervised learning algorithms to divide theinput geometry. This feature is necessary for the implementa-tion of the method since the geometry elements have to be spec-iﬁed by the user before they can be examined in more detail.This kind of input can only be reproduced by supervised learn-ing methods. An adapted process of the method established by[29] can be seen in Figure 4. The changes made include the
+adjustment of the feature vector generation and the applicationof diﬀerent machine learning classiﬁcation algorithms. A rangeof machine learning algorithms have been tested and the twomost suitable algorithms for this task were neural networks anddecision trees.
+After the geometry has been successfully classiﬁed, it must
+be clustered to recognize identical elements. For this purpose,a cluster method is used that does not require a speciﬁc group
+Fig. 4. Process of supervised shape segmentation based on [29]
+quantity since this is unknown at the start of the search query.The db-scan algorithm (density-based spatial clustering of ap-plications with noise) is applied to this clustering task becauseit is able to cluster data into an unknown number of groups andto detect noise in the input data. This last feature separates thedb-scan method from many other clustering algorithms (e.g. k-means) and is important when the classiﬁcation result is notcompletely perfect. In this case, the clustering method is ableto distinguish between the noise (bad classiﬁed faces) and thegood results (correctly labeled faces).
+The outcome of the shape segmentation with the training and
+unknown test-dataset including the clustering of the separatedgeometry is displayed in Figure 5. The training dataset con-
+sists of ﬁve diﬀerent geometries (Fig. 6parta-d,f) and the test
+dataset contains one unknown geometry and one scaled versionof a part (Fig. 6parteandc). For the classiﬁcation a neural net-
+work with two hiddenlayers (layout: 543-200-50-1) was trainedand for clustering the db-scan algorithm was applied. The exactparameters and results for this analysis are listed in table 1.
+Fig. 5. Result of the diﬀerent steps in the shape segmentation process
+Table 1. Classiﬁcation parameters and results for training and test dataset
+parameters training test
+dataset 146132 x 543 48114 x 543
+label (No. label 1 /No. label 2) 120831 /25301 37337 /10777
+accuracy 100,00 % 94,80 %
+In this illustration the input geometry is shown on the left
+side, next to the segmented geometry. The colors gray and red
+4
+This is a resupply of March 2023 as the template used in the publication of the original article contained errors. The content of the article has remained unaffected.
+
+
+--- Page 5 ---
+S. Bickel  et al. / Procedia CIRP 96 (2021) 133–138 137
+visually separate the geometry by their corresponding labels.
+On the right side of the segmented part the outcome of the clus-tering can be seen. Each cluster group is represented by a dif-ferent colour, resulting in the rainbow pattern for the tooth ge-ometries. The last picture displays the ﬁnal result of the shapesegmentation: the isolated shape of a tooth. This geometry cannow be utilized as a starting point for a local similarity analysisby applying the projection method in the normal direction, asexplained in section 3.2.
+4. Case Study
+The previously described methods will be examined in this
+section with the help of a case study. Before the analysis can bestarted, a data set must be determined. This is composed of sixdiﬀerent sheet-bulk metal formed parts, each of which diﬀers inthe shape of its teeth. Depending on their basic tooth geometrythe components can be divided into three groups. All parts andtheir corresponding groups are shown in Figure 6.
+Fig. 6. Sheet-bulk metal formed parts and their tooth geometry for the case
+study
+This investigation aims to represent these groups, implying
+that the ﬁrst results of the similarity search must be from the
+same group as the search component. These parts can either beavailable as results in the same cluster or in clusters next to eachother. Other parts should not be placed between componentsfrom equal groups.
+The corresponding similarity values for the center projec-
+tion method are shown in Figure 7. On the y-axis of the table,
+the search query part is listed, and on the x-axis all parts withtheir according result are shown. Therefore, on the diagonal allresults are 1,000 because every part matches itself perfectly.
+Fig. 7. Results of the similarity comparison with the case study partsAll result values have been clustered and colored accord-
+ing to the color scheme in the legend. Based on this analysis itcan be concluded that the similarity search with the projectionmethods worked very well for this data set. In all search queriesthe components from the own class were ﬁrst displayed as re-sults. Furthermore part cis always the least similar component.
+An ideal example is the result for the geometry e. Here the most
+similar component is from the same group as the search part andthe following three are all in one cluster. The work piece cis the
+most dissimilar compared to the search query.
+An exemplary search run for the entire system is shown in
+the Figure 8. The illustration shows the search query for ge-
+ometry bin more detail. First the global similarity comparison
+is carried out and afterwards the clusters are generated. In thiscase, three clusters are generated: the ﬁrst for geometry aand
+d, the second cluster for geometry eandfand the last cluster
+with only geometry c. Afterwards, each cluster is analyzed by
+itself. The teeth are separated from the main body and comparedwith the other extracted teeth using decision trees as a classiﬁer.This leads to a new ranking within each cluster. The procedureis carried out for each remaining cluster and an overall rankingis generated. In this particular analysis, geometry ais the most
+similar, followed by geometry d,f,eandc.
+This result can then be used by the process engineer to apply
+the linked information from geometry ato the new, searched
+geometry. Especially for sheet-bulk metal formed parts, the in-formation gain can be data for prototype production, e.g. theforming pressure. Furthermore, the process engineer can beprovided with evaluation metrics for the process simulations,such as contact ratio or total equivalent plastic strain.
+Fig. 8. Example run for part b
+5. Conclusion
+In summary, this paper shows a new approach for apply-
+ing similarity search in the context of smart manufacturing. Toadapt the search as accurately as possible to the application, theprocess uses a two step approach. First, searching for global
+5
+This is a resupply of March 2023 as the template used in the publication of the original article contained errors. The content of the article has remained unaffected.
+
+
+--- Page 6 ---
+138 S. Bickel  et al. / Procedia CIRP 96 (2021) 133–138
+similarity and subsequently splitting the geometry according
+to the user input. Then this separated geometry is again com-pared for similarity but only on the local level. For the similaritycomparisons a new procedure is shown, based on the projectionmethod that is able to adapt by changing the way of projection.Finally, the potential of this method was illustrated through ap-plying it to a case study with sheet-bulk metal formed parts.These parts diﬀer in their tooth geometry, a characteristic thatwas used for the segmentation of the geoemtry. To end the casestudy, an exemplary run-through was executed, including all in-termediate steps. A possible boundary in the application couldbe the deﬁnition of the local geometry feature, which needs tobe known and must have enough faces to train a machine learn-ing model.
+The ﬁeld of ﬂexible mass production can also beneﬁt greatly
+from the similarity search because of the high output of dif-ferent geometries. Therefore, for a new component variant thecorresponding older, validated parts can be found automatically,including their manufacturing data. This results in faster pro-duction times and higher overall eﬃciency.
+6. Outlook
+For further research, many aspects could be considered.
+At ﬁrst diﬀerent machine learning algorithm should be taken
+into the analysis. The opportunities for newly available, pow-erful classiﬁers are increasing rapidly, so further investigationsshould take these methods into account. Especially ensemblelearners should be observed for the classiﬁcation task since de-cision trees show good results, which should increase by apply-ing ensemble methods.
+Finally, diﬀerent similarity comparison algorithms for the
+matrices should be analyzed. Other ways of comparing matri-ces are available, for example peak signal-to-noise ratio (psnr)or structural similarity index (ssim) for measuring image qual-ity. Perhaps these metrics can be combined with the correlationcoeﬃcient to result in an even better retrieval outcome.
+Acknowledgements
+This research work is part of the FAU Advanced Analytics
+for Production Optimization project (E|ASY-Opt) and funded
+by the Bavarian program for the Investment for growth and jobsobjective ﬁnance by the European Regional Development Fund(ERDF), 2014-2020. It is managed by the Bavarian Ministryof Economic Aﬀ airs and Media, Energy and Technology. The
+authors are responsible for the content of this publication.
+We gratefully acknowledge the support of NVIDIA Corpora-
+tion with the donation of a Titan V GPU used for this research.
+References
+[1] National Institute of Standard and Technology., 2014. Smart Manufactur-
+ing Operations Planning and Control.
+[2] Wang, S., Wan, J., Li, D., and Zhang, C., 2015. Implementing Smart Fac-
+tory of Industrie 4.0: An Outlook. International Journal of Distributed Sen-
+sor Networks[3] Lucke, D., Constantinescu, C., and Westkaemper, E., 2008. Smart Factory:
+A Step towards the Next Generation of Manufacturing. Manufacturing Sys-tems and Technologies for the New Frontier, pp. 115-118
+[4] Brettel, M., Friederichsen, N., Keller, M., Rosenberg, M., 2014. How Virtu-
+alization, Decentralization and Network Building Change the Manufactur-ing Landscape: An Industry 4.0 Perspective. International Journal of Sci-ence, Engineering and Technology, Vol. 8, No. 1, pp. 37-44
+[5] Zuehlke, D., 2010. Smartfactory-towards a Factory-of-Things. Annual Re-
+views in Control, Vol. 34, No. 1, pp. 129-138
+[6] Tao, F., Qi, Q., Liu, A., Kusiak, A., 2018. Data-driven smart manufacturing.
+In: Journal of Manufacturing Systems 48, S. 114
+[7] Zehtaban, L., Elazhary, O., Roller, D., 2016. A framework for similarity
+recognition of CAD models. In: Journal of Computational Design and En-gineering 3 (3), S. 274285
+[8] Tangelder, J.W.H., Veltkamp, R.C., 2008. A survey of content based 3D
+shape retrieval methods. Multimed Tools Appl 39, 441
+[9] Zhang, D., Lu, G., 2004. Review of shape representation and description
+techniques. In: Pattern Recognition 37 (1), S. 119
+[10] Zheng, Q., Ji, J., Jun, Q., 2008. Content based 3D model retrieval: A survey,
+International Workshop on Content-Based Multimedia Indexing, London,pp. 249-256
+[11] Mehalawia, M., Miller, R.A., 2001. A database system of mechanical com-
+ponents based on geometric and topological similarity. Part I: representa-tion. In: Computer-Aided Design
+[12] McWherter, D., Peabody, M., Regli, W.C., Shokoufandeh, A., 2001.
+Transformation invariant shape similarity comparison of solid models. InDETC01
+[13] Chen, D., Xiao-Pei, T., Shen, Y.T., Ouhyoung, M., 2003. On Visual Simi-
+larity Based 3D Model Retrieval. Computer Graphics Forum 22: 223-232.
+[14] Qin, F., Gao, S., Yang, X., Bai, J., Zhao, Q., 2017. A sketch-based semantic
+retrieval approach for 3D CAD models. Applied Mathematics-A Journal ofChinese Universities 32, 2752
+[15] Ohbuchi R., Minamitani T., Takei T., 2003. Shape-similarity search of 3D
+models by using enhanced shape functions. In Theory and Practice of Com-puter Graphics p. 97-104.
+[16] Opitz, H. 1970. A Classiﬁcation System to Describe Workpieces. New
+York: Pergamon Press; Translated by Acton Taylor
+[17] Salvendy, G. 2001. Handbook of Industrial Engineering Technology and
+Operations Management, 18. New York, John Wiley Sons, Inc
+[18] Henderson, M., Musti, S., 1988. Automated group technology part coding
+from a three-dimensional CAD database. Journal of Manufacturing Sci-ence and Engineering, Transactions of the ASME, 110(3), 278-287
+[19] Liu, Z., Bu, S., Zhou, K., Gao, S., Han, J., Wu, J., 2013. A Survey on Partial
+Retrieval of 3D Shapes. Journal of Computer Science and Technology 28,pp. 836-851
+[20] Samuel, A.L., 1959. Some studies in machine learning using the game of
+checkers. In: IBM Journal of Research and Development, Vol. 3, No. 3
+[21] Michalski, R.S., Kodratoﬀ, Y., 1990. Research in machine learning; recent
+progress, classication of methods, and future directions. In Machine Learn-ing: An Articial Intelligence Approach, volume III. Morgan Kaufmann
+[22] Carbonell, J.G., Michalski, R.S., Mitchell, T.M., 1983. An overview of ma-
+chine learning. In Machine Learning: An Articial Intelligence Approach.Palo Alto: Tioga Publishing Company
+[23] Kelleher, J., Tierney, B., 2018. Data Science. Boston: The MIT Press Es-
+sential Knowledge Series
+[24] Han, J., Kamber, M., Pei, J., 2012. Data Mining. Concepts and Techniques.
+3. Auﬂ. Waltham: Morgen Kaufmann
+[25] Runkler, T., 2010, Data-Mining. Methoden und Algorithmen intelligenter
+Datenanalyse, 1. Auﬂ. Wiesbaden: Vieweg +Teubner
+[26] Tan, P.-N., Steinbach, M., Kumar, V., 2010. Introduction to Data Mining.
+Boston: Pearson/ Addison-Wesley
+[27] Petersohn, H., 2005. Data mining. Verfahren, Prozesse, Anwendungsar-
+chitektur. 1. Auﬂ. Munich: Oldenbourg
+[28] Spruegel, T.C., Schroeppel, T., Wartzack, S., 2017. Generic Approach to
+Plausibility Checks for Structural Mechanics with Deep Learning. In: Pro-ceedings of the ICED17, Design Society
+[29] Kalogerakis, E., Hertzmann, A., Singh, K., 2010. Learning 3D Mesh Seg-
+mentation and Labeling, ACM Transactions on Graphics, Vol. 29, No. 3
+6
+This is a resupply of March 2023 as the template used in the publication of the original article contained errors. The content of the article has remained unaffected.
