@@ -1,0 +1,13 @@
+data:
+  root: /path/to/ABC
+  split: train
+model:
+  mask_ratio: 0.6
+  embedding_dim: 256
+loss:
+  lambda_geom: 0.2
+  lambda_face: 0.2
+train:
+  epochs: 100
+  batch_size: 8
+  device: cuda
