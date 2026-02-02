@@ -57,7 +57,30 @@ class UVNetEncoder(nn.Module):
     def forward(self, graph):
         x = prep_face_feat(graph.ndata["x"].float())
         e = prep_edge_feat(graph.edata["x"].float())
-        node_feat = self.surface(x)
-        edge_feat = self.curve(e)
-        node_emb, graph_emb = self.graph(graph, node_feat, edge_feat)
+        node_feat = self._forward_with_safe_batchnorm(self.surface, x)
+        edge_feat = self._forward_with_safe_batchnorm(self.curve, e)
+        node_emb, graph_emb = self._forward_graph_safe(graph, node_feat, edge_feat)
         return node_emb, graph_emb
+
+    @staticmethod
+    def _forward_with_safe_batchnorm(module, data):
+        if data.size(0) < 2 and module.training:
+            was_training = module.training
+            module.eval()
+            try:
+                return module(data)
+            finally:
+                if was_training:
+                    module.train()
+        return module(data)
+
+    def _forward_graph_safe(self, graph, node_feat, edge_feat):
+        if (graph.num_nodes() < 2 or graph.num_edges() < 2) and self.graph.training:
+            was_training = self.graph.training
+            self.graph.eval()
+            try:
+                return self.graph(graph, node_feat, edge_feat)
+            finally:
+                if was_training:
+                    self.graph.train()
+        return self.graph(graph, node_feat, edge_feat)
