@@ -1,5 +1,23 @@
+import importlib.util
+import sys
+from pathlib import Path
+
 import torch
 from torch import nn
+
+
+def _ensure_uvnet_on_path():
+    if importlib.util.find_spec("uvnet") is not None:
+        return
+    repo_root = Path(__file__).resolve().parents[1]
+    candidates = [
+        repo_root / "external" / "uvnet",
+        Path(__file__).resolve().parents[3] / "external" / "uvnet",
+    ]
+    for candidate in candidates:
+        if (candidate / "uvnet" / "encoders.py").exists():
+            sys.path.insert(0, str(candidate))
+            return
 
 
 def prep_face_feat(x):
@@ -25,6 +43,7 @@ def prep_edge_feat(x):
 class UVNetEncoder(nn.Module):
     def __init__(self, node_embed_dim=64, edge_embed_dim=64, graph_embed_dim=128):
         super().__init__()
+        _ensure_uvnet_on_path()
         from uvnet.encoders import UVNetSurfaceEncoder, UVNetCurveEncoder, UVNetGraphEncoder
 
         self.surface = UVNetSurfaceEncoder(in_channels=7, output_dims=node_embed_dim)
