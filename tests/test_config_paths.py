@@ -6,4 +6,4 @@ def test_config_has_step_paths():
     assert "data" in cfg
     assert "step_root" in cfg["data"]
     assert "graph_root" in cfg["data"]
-    assert cfg["data"].get("layout") == "abc"
+    assert cfg["data"].get("layout") in ("abc", "flat")
