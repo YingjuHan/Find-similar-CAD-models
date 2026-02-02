@@ -1,9 +1,9 @@
 data:
-  root: /path/to/ABC
+  root: C:\Users\hanyi\workspace\ABC-DataSet\abc_0020_step_v00
   split: train
-  layout: abc
-  step_root: /path/to/ABC/chunks
-  graph_root: /path/to/ABC_graphs
+  layout: flat
+  step_root: C:\Users\hanyi\workspace\ABC-DataSet\abc_0020_step_v00
+  graph_root: C:\Users\hanyi\workspace\ABC-DataSet\abc_0020_step_v00_graphs
   uvnet_root: external/uvnet
 model:
   node_embed_dim: 64
